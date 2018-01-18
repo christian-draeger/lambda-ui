@@ -21,6 +21,20 @@ describe("Header", () => {
 
     const wrapDefaultValues = (input) => R.merge({showStartBuildButton: true}, input);
 
+    describe("dark theme", () => {
+        it("should use dark theme style", () => {
+            const component = shallow(<Header pipelineName={"Test"} showStartBuildButton={true} darkTheme={true} links={[]}/>);
+            expect(component.find(".appHeaderDark").length).toBe(1);
+            expect(component.find(".appHeader").length).toBe(0);
+        });
+
+        it("should use default theme style", () => {
+            const component = shallow(<Header pipelineName={"Test"} showStartBuildButton={false} links={[]}/>);
+            expect(component.find(".appHeaderDark").length).toBe(0);
+            expect(component.find(".appHeader").length).toBe(1);
+        });
+    });
+
     describe("start build button", () => {
         it("should show start build button", () => {
             const component = shallow(<Header pipelineName={"Test"} showStartBuildButton={true} links={[]}/>);

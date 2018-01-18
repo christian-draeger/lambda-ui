@@ -18,15 +18,27 @@ body
   padding-left: 15px
   color: black
 
-.link
-  color: $blue
+%link-shared
   padding: 0 12px
   text-decoration: none
   vertical-align: middle
-  border-right: 1px solid lighten($blue, 20%)
+  border-right: 1px solid
+
+.link
+  @extend %link-shared
+  color: $blue
+  border-right-color: lighten($blue, 20%)
 
 .link:hover, .link:active, .link:focus
   color: darken($blue, 20%)
+
+.linkDarkTheme
+  @extend %link-shared
+  color: $light-blue
+  border-right-color: lighten($light-blue, 20%)
+
+.linkDarkTheme:hover, .link:active, .link:focus
+  color: lighten($light-blue, 20%)
 
 .link:last-child
   border-right: none

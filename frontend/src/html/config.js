@@ -5,6 +5,7 @@ window.lambdaui.config = {
     name: "Super coole Testpipeline",
     baseUrl: "localhost:8081",
     showStartBuildButton: true,
+    darkTheme: true,
     navbar: {
         links: [
             {

@@ -1,10 +1,19 @@
 @import 'colors'
 
-.appHeader
-  background-color: white
+%appHeader-shared
   padding: 8px
-  border-bottom: 2px solid #687fc2
   color: #444
+  border-bottom: 2px solid
+
+.appHeader
+  @extend %appHeader-shared
+  background-color: white
+  border-bottom-color: #687fc2
+
+.appHeaderDarkTheme
+  @extend %appHeader-shared
+  background-color: $very-dark-grey
+  border-bottom-color: $light-blue
 
 .logo
   display: inline-block
@@ -28,15 +37,30 @@
   vertical-align: middle
   margin: 0 24px 0 16px
 
-.runButton
+%runButton-shared
   background: none
+  border: 1px solid
+
+.runButton
+  @extend %runButton-shared
   color: $blue
-  border: 1px solid $blue
+  border-color: $blue
 
   &:hover, &:active, &:focus
     background: $blue
     color: $white
     border: 1px solid $blue
+
+.runButtonDarkTheme
+  @extend %runButton-shared
+  background: $light-blue
+  color: $white
+  border-color: $blue
+
+  &:hover, &:active, &:focus
+    background: none
+    color: $light-blue
+    border: 1px solid $light-blue
 
 .linksHeader
   display: inline-block
