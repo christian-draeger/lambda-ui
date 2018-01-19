@@ -1,4 +1,5 @@
 @import "colors"
+@import "colorsDarkTheme"
 
 .quickDetails
   margin-left: 30px
@@ -7,13 +8,14 @@
   overflow-x: hidden
 
   // First QuickStep before should not display -> First of Typ is quickTitle
-  >.quickStep:nth-of-type(2):before
+  >.quickStep:nth-of-type(2):before,
+  >.quickStepDarkTheme:nth-of-type(2):before
     display: none
 
 .quickTitle
   margin-left: 5px
 
-.quickStep
+%quickStep-shared
   display: inline-block
   width: 14px
   height: 14px
@@ -21,15 +23,19 @@
   margin-left: 5px
   position: relative
   cursor: pointer
-
   &:before
     content: ""
     width: 7px
     height: 2px
-    background-color: $dark-grey
     position: absolute
     left: -7px
     top: 5px
+
+.quickStep
+  @extend %quickStep-shared
+
+  &:before
+    background-color: $dark-grey
 
   &.success
     background-color: $green
@@ -55,6 +61,35 @@
     background-color: $blue
     border: 1px solid $blue
     
+.quickStepDarkTheme
+  @extend %quickStep-shared
+
+  &:before
+    background-color: $dark-light-grey
+
+  &.success
+    background-color: $brighter-green
+    border: 1px solid $dark-light-grey
+
+  &.failure
+    background-color: $brighter-red
+    border: 1px solid $dark-light-grey
+
+  &.waiting
+    background-color: $orange
+    border: 1px solid $dark-light-grey
+
+  &.pending
+    background-color: darken($dark-light-grey, 20%)
+    border: 1px solid $dark-light-grey
+
+  &.killed
+    background-color: $darker-grey
+    border: 1px solid $dark-light-grey
+
+  &.running
+    background-color: $brighter-blue
+    border: 1px solid $dark-light-grey
 
 .quickStepContainer
   display: inline-block
@@ -63,7 +98,8 @@
   border-radius: 5px
 
   &:first-of-type
-    > .quickStep:before
+    > .quickStep:before,
+    > .quickStepDarkTheme:before
       width: 2px
       height: 10px
       top: -10px
@@ -78,20 +114,27 @@
 
 
 .quickSubsteps
-  >.quickStep:first-of-type:before
+  >.quickStep:first-of-type:before,
+  >.quickStepDarkTheme:first-of-type:before
     width: 2px
     height: 10px
     top: -10px
     left: 6px
 
-  >.quickStep:last-of-type:after
+  >.quickStep:last-of-type:after,
+  >.quickStepDarkTheme:last-of-type:after
     position: absolute
     content: ""
-    background-color: $dark-grey
     width: 2px
     height: 25px
     right: -2px
     top: -18px
+
+  >.quickStep:last-of-type:after
+    background-color: $dark-grey
+
+  >.quickStepDarkTheme:last-of-type:after
+    background-color: $dark-light-grey
 
 .quickDetails__scrollInfo
   float: right

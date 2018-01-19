@@ -2,6 +2,7 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import "../../../sass/quickDetails.sass";
 import R from "ramda";
+import App from "../App.es6";
 import QuickStep from "../details/QuickStep.es6";
 import * as Actions from "../actions/BuildStepActions.es6";
 import * as Utils from "../Utils.es6";
@@ -26,24 +27,26 @@ export class QuickDetails extends React.Component {
     }
 
     expandAllLink() {
-            return <span className="quickDetails__expand-all link" onClick={this.props.expandAllFn}
-                         title="Open all steps">
+        const expand = "quickDetails__expand-all link" + App.darkTheme();
+        return <span className={expand} onClick={this.props.expandAllFn}
+            title="Open all steps">
                 <i className="fa fa-plus-square-o"></i>
             </span>;
     }
 
     collapseAllLink() {
-            return <span className="quickDetails__collapse-all link" onClick={this.props.collapseAllFn}
-                         title="Close all steps">
+        const collapse = "quickDetails__collapse-all link" + App.darkTheme();
+        return <span className={collapse} onClick={this.props.collapseAllFn}
+            title="Close all steps">
                 <i className="fa fa-minus-square-o"></i>
             </span>;
     }
 
     followLink() {
-            const followIcon = this.props.isFollow ? "fa-check-square-o" : "fa-square-o";
-
-            return <span className="quickDetails__follow link" onClick={this.props.followFn}
-                         title="Follow active steps">
+        const followIcon = this.props.isFollow ? "fa-check-square-o" : "fa-square-o";
+        const follow = "quickDetails__follow link" + App.darkTheme();
+        return <span className={follow} onClick={this.props.followFn}
+            title="Follow active steps">
                 <i className={`fa ${followIcon}`}></i> follow
             </span>;
     }
@@ -55,7 +58,7 @@ export class QuickDetails extends React.Component {
             <div className="quickTitle">Quick
                 Access {this.expandAllLink()} {this.collapseAllLink()} {this.followLink()} </div>
             {R.map(step => <QuickStep key={step.stepId} curDepth={1} maxDepth={maxDepth} buildId={buildId}
-                                      step={step}/>)(steps)}
+                step={step}/>)(steps)}
 
             <TransitionGroup
                 transitionName="quickDetails__scrollInfo--fade"
@@ -63,7 +66,7 @@ export class QuickDetails extends React.Component {
                 transitionAppear={true}
                 transitionAppearTimeout={200}
                 transitionLeaveTimeout={200}>
-                { showScrollInfo && <ScrollInfo/> }
+                {showScrollInfo && <ScrollInfo/>}
             </TransitionGroup>
 
         </div>;

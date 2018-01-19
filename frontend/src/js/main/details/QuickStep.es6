@@ -1,6 +1,7 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import R from "ramda";
+import App from "../App.es6";
 import {scrollToStep} from "../actions/BuildDetailActions.es6";
 import {classes} from "../ComponentUtils.es6";
 
@@ -13,7 +14,7 @@ export class QuickStep extends React.Component {
     render(){
         const {showSubsteps, step, buildId, scrollToStep, maxDepth, curDepth} = this.props;
 
-        const quickStepClasses = classes("quickStep", step.state);
+        const quickStepClasses = classes("quickStep" + App.darkTheme(), step.state);
 
         if(!showSubsteps || !step.steps || step.steps.length === 0 || maxDepth === curDepth){
             return <div title={step.name} className={quickStepClasses} onClick={scrollToStep}></div>;

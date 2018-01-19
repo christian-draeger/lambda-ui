@@ -30,18 +30,11 @@
   transition: width 0.1s ease-in-out
   overflow: hidden
 
+// Buildstate Colors
 .buildSummary
   @extend %buildSummary-shared
   border-bottom: 1px solid #ccc
   background-color: #FFFFFF
-
-.buildSummaryDarkTheme
-  @extend %buildSummary-shared
-  border-bottom: 2px solid #606060
-  background-color: #2d2d2d
-
-// Buildstate Colors
-.buildSummary
   &.success:before
     background-color: $green
   &.failed:before
@@ -52,6 +45,10 @@
     background-color: $dark-grey
 
 .buildSummaryDarkTheme
+  @extend %buildSummary-shared
+  border-bottom: 2px solid #606060
+  background-color: #2d2d2d
+  transition: all 3s ease-in-out
   &.success:before
     background-color: #37BF2D
   &.failed:before
