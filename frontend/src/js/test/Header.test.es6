@@ -22,16 +22,29 @@ describe("Header", () => {
     const wrapDefaultValues = (input) => R.merge({showStartBuildButton: true}, input);
 
     describe("dark theme", () => {
-        it("should use dark theme style", () => {
-            const component = shallow(<Header pipelineName={"Test"} showStartBuildButton={true} darkTheme={true} links={[]}/>);
-            expect(component.find(".appHeaderDark").length).toBe(1);
+        it("should use dark theme styles", () => {
+            const component = shallow(<Header
+                pipelineName={"Test"}
+                showStartBuildButton={true}
+                darkTheme={true}
+                links={[]}/>);
+
+            expect(component.find(".appHeaderDarkTheme").length).toBe(1);
             expect(component.find(".appHeader").length).toBe(0);
+            expect(component.find(".runButtonDarkTheme").length).toBe(1);
+            expect(component.find(".runButton").length).toBe(0);
         });
 
-        it("should use default theme style", () => {
-            const component = shallow(<Header pipelineName={"Test"} showStartBuildButton={false} links={[]}/>);
-            expect(component.find(".appHeaderDark").length).toBe(0);
+        it("should use default theme styles", () => {
+            const component = shallow(<Header
+                pipelineName={"Test"}
+                showStartBuildButton={true}
+                links={[]}/>);
+
+            expect(component.find(".appHeaderDarkTheme").length).toBe(0);
             expect(component.find(".appHeader").length).toBe(1);
+            expect(component.find(".runButtonDarkTheme").length).toBe(0);
+            expect(component.find(".runButton").length).toBe(1);
         });
     });
 
@@ -98,13 +111,13 @@ describe("Header", () => {
             expect(mapStateToProps(state)).toEqual(expected);
         });
 
-        it("should get emty array for links, when no links available", () => {
+        it("should get empty array for links, when no links available", () => {
             const state = {config: {name: "Pipeline", navbar: {}}};
             const expected = wrapDefaultValues({pipelineName: "Pipeline", links: []});
             expect(mapStateToProps(state)).toEqual(expected);
         });
 
-        it("should get emty array for links, when no navbar available", () => {
+        it("should get empty array for links, when no navbar available", () => {
             const state = {config: {name: "Pipeline"}};
             const expected = wrapDefaultValues({pipelineName: "Pipeline", links: []});
             expect(mapStateToProps(state)).toEqual(expected);

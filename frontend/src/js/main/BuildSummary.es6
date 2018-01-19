@@ -2,6 +2,7 @@ import React, {PropTypes} from "react";
 import R from "ramda";
 import {connect} from "react-redux";
 import BuildDetails from "./details/BuildDetails.es6";
+import App from "./App.es6";
 import {toggleBuildDetails as toggleAction} from "./actions/BuildDetailActions.es6";
 import Moment, {now} from "moment";
 import {StateIcon} from "./StateIcon.es6";
@@ -9,7 +10,8 @@ import {FormattedDuration, FormattedTime} from "./DateAndTime.es6";
 
 export const renderSummary = (properties) => {
     const {buildId, buildNumber, startTime, state, toggleBuildDetails, open, duration} = properties;
-    let classesForState = "row buildSummary " + state;
+    let classesForState = "row buildSummary" + App.darkTheme() + " " + state;
+    const classBuildInfoRow = "buildInfoRow" + App.darkTheme();
     if (open) {
         classesForState += " open";
     }
@@ -22,10 +24,10 @@ export const renderSummary = (properties) => {
     return <div className={classesForState}>
         <div className="buildInfo" onClick={toggleBuildDetails}>
             <StateIcon state={state}/>
-            <div className="buildInfoRow overview">
+            <div className={classBuildInfoRow + " overview"}>
                 <div className="buildNumber">Build #{buildNumber}</div>
             </div>
-            <div className="buildInfoRow time">
+            <div className={classBuildInfoRow + " time"}>
                 <div className="buildStartTime" title={startTextTooltip}><i className="fa fa-flag-checkered"
                                                    aria-hidden="true"></i>Started: {startText}</div>
                 <div className="buildDuration"><i className="fa fa-clock-o" aria-hidden="true"></i>Duration:

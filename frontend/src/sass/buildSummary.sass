@@ -1,26 +1,44 @@
+@import 'colors'
+@import 'colorsDarkTheme'
+
 *
   box-sizing: border-box
 
-.buildSummary:before
+%buildSummary-before
   position: absolute
-  top: 0px
-  left: 0px
+  top: 0
+  left: 0
   height: 100%
   display: inline-block
   content: ''
   width: 26px
   background-color: #FFFFFF
-  transistion: width 0.1s ease-in-out
+  transition: width 0.1s ease-in-out
 
-.buildSummary
-  margin-bottom: 10px
+.buildSummary:before
+  @extend %buildSummary-before
+  width: 26px
+
+.buildSummaryDarkTheme:before
+  @extend %buildSummary-before
+  width: 65px
+
+%buildSummary-shared
   width: 100%
   position: relative
-  background-color: #FFFFFF
-  margin-bottom: 0px
+  margin-bottom: 0
   transition: width 0.1s ease-in-out
-  border-bottom: 1px solid #ccc
   overflow: hidden
+
+.buildSummary
+  @extend %buildSummary-shared
+  border-bottom: 1px solid #ccc
+  background-color: #FFFFFF
+
+.buildSummaryDarkTheme
+  @extend %buildSummary-shared
+  border-bottom: 2px solid #606060
+  background-color: #2d2d2d
 
 // Buildstate Colors
 .buildSummary
@@ -33,6 +51,16 @@
   &.unknown:before
     background-color: $dark-grey
 
+.buildSummaryDarkTheme
+  &.success:before
+    background-color: #37BF2D
+  &.failed:before
+    background-color: #d71318
+  &.running:before
+    background-color: $brighter-blue
+  &.unknown:before
+    background-color: $dark-grey
+
 // Success
 .buildSummary.success:before
   background-color: $green
@@ -41,50 +69,117 @@
   & .buildNumber, .buildIcon
     color: $green
 
+.buildSummaryDarkTheme.success:before
+  background-color: $brighter-green
+
+.buildSummaryDarkTheme.open.success
+  color: $brighter-green
+
+.buildSummaryDarkTheme.open.success .buildInfo
+  & .buildNumber
+    color: $brighter-green
+  & .buildIcon
+    color: $brighter-green
+    font-size: 30px
+    left: 20px
+    top: 9px
 
 // Waiting
 .buildSummary.waiting:before
   background-color: $peru
 
-.buildSummary.waiting
+.buildSummary.open.waiting .buildInfo
   & .buildNumber, .buildIcon
     color: $peru
+
+.buildSummaryDarkTheme.waiting:before
+  background-color: $orange
+
+.buildSummaryDarkTheme.open.waiting
+  color: $orange
+
+.buildSummaryDarkTheme.open.waiting .buildInfo
+  & .buildNumber
+    color: $orange
+  & .buildIcon
+    color: $orange
+    font-size: 30px
+    left: 20px
+    top: 9px
 
 // Failed
 .buildSummary.failed:before
   background-color: $red
 
-.buildSummary.failed
+.buildSummary.open.failed .buildInfo
   & .buildNumber, .buildIcon
     color: $red
+
+.buildSummaryDarkTheme.failed:before
+  background-color: $brighter-red
+
+.buildSummaryDarkTheme.open.failed
+  color: $brighter-red
+
+.buildSummaryDarkTheme.open.failed .buildInfo
+  & .buildNumber
+    color: $brighter-red
+  & .buildIcon
+    color: $brighter-red
+    font-size: 30px
+    left: 20px
+    top: 9px
 
 // Running
 .buildSummary.running:before
   background-color: $blue
 
-.buildSummary.running
+.buildSummary.open.running .buildInfo
   & .buildNumber, .buildIcon
     color: $blue
 
-// Killed
-.buildSummary.killed:before
-  background-color: $black
+.buildSummaryDarkTheme.running:before
+  background-color: $brighter-blue
 
-.buildSummary.killed
-  & .buildNumber, .buildIcon
-    color: $black
+.buildSummaryDarkTheme.open.running
+  color: $brighter-blue
 
-// Unknown
+.buildSummaryDarkTheme.open.running .buildInfo
+  & .buildNumber
+    color: $brighter-blue
+  & .buildIcon
+    color: $brighter-blue
+    font-size: 30px
+    left: 20px
+    top: 9px
+
+// Killed or Unknown
 .buildSummary.killed:before
   background-color: $dark-light-grey
 
-.buildSummary.killed
+.buildSummary.open.killed .buildInfo
   & .buildNumber, .buildIcon
     color: $dark-grey
 
+.buildSummaryDarkTheme.killed:before
+  background-color: $brighter-grey
+
+.buildSummaryDarkTheme.open.killed
+  color: $brighter-grey
+
+.buildSummaryDarkTheme.open.killed .buildInfo
+  & .buildNumber
+    color: $brighter-grey
+  & .buildIcon
+    color: $brighter-grey
+    font-size: 30px
+    left: 20px
+    top: 9px
+
 
 // Open
-.buildSummary
+.buildSummary,
+.buildSummaryDarkTheme
   &.open:before
     width: 10px
     transition: width 0.1s ease-in-out
@@ -94,26 +189,40 @@
     & .buildIcon
       color: $lightGrey
 
-    & .buildInfo
-      border-bottom: 2px solid $lightGrey
-
     & .buildInfo .buildIcon
       position: absolute
       left: 6px
       color: $white
       transition: left 0.1s ease-in-out
 
+.buildSummary
+  &.open
+    & .buildInfo
+      border-bottom: 2px solid $lightGrey
+
+.buildSummaryDarkTheme
+  &.open
+    & .buildInfo
+      border-bottom: 2px solid #606060
+
 //Build Info
 .buildInfo
   cursor: pointer
 
-.buildSummary .buildInfo
+.buildSummary .buildInfo .buildIcon
+  top: 8px
+  left: 6px
+
+.buildSummaryDarkTheme .buildInfo .buildIcon
+  top: 20px
+  left: 25px
+
+.buildSummary .buildInfo,
+.buildSummaryDarkTheme .buildInfo
   padding-left: 26px
 
   & .buildIcon
     position: absolute
-    top: 12px
-    left: 6px
     color: $white
 
   & .buildInfoRow
@@ -123,6 +232,14 @@
     font-size: 1em
     color: $dark-grey
 
+  & .buildInfoRowDarkTheme
+    display: inline-block
+    vertical-align: middle
+    text-align: center
+    padding: 8px
+    font-size: 1em
+    color: $dark-light-grey
+
     & .buildNumber
       vertical-align: top
       font-size: 1.3em
@@ -130,6 +247,9 @@
     &.overview
       width: 180px
       max-width: 180px
+
+    &.time
+      text-align: left
 
     & .fa
       padding: 4px
@@ -140,3 +260,39 @@
     left: 16px
     color: $very-dark-grey
     transition: left 0.1s ease-in-out
+
+.buildSummaryDarkTheme.open .buildInfo
+  color: $darker-grey
+  & .buildIcon
+    left: 25px
+    animation-name: rubberBand
+    animation-duration: 0.5s
+    animation-fill-mode: both
+    color: $white
+
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
++keyframes(rubberBand)
+  0%
+    transform: scale3d(1, 1, 1)
+    color: $white
+  30%
+    transform: scale3d(1.25, 0.75, 1)
+  40%
+    transform: scale3d(0.75, 1.25, 1)
+  50%
+    transform: scale3d(1.15, 0.85, 1)
+  65%
+    transform: scale3d(.95, 1.05, 1)
+  75%
+    transform: scale3d(1.05, .95, 1)
+  100%
+    transform: scale3d(1, 1, 1)

@@ -53,14 +53,14 @@
 
 .runButtonDarkTheme
   @extend %runButton-shared
-  background: $light-blue
-  color: $white
-  border-color: $blue
+  background: lighten($very-dark-grey, 10%)
+  color: lighten($dark-grey, 10%)
+  border-color: lighten($dark-grey, 10%)
 
   &:hover, &:active, &:focus
-    background: none
-    color: $light-blue
-    border: 1px solid $light-blue
+    background: darken($dark-grey, 10%)
+    color: $dark-light-grey
+    border: 1px solid $dark-light-grey
 
 .linksHeader
   display: inline-block

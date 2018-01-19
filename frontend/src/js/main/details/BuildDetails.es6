@@ -2,6 +2,7 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import R from "ramda";
 import BuildStep from "../steps/BuildStep.es6";
+import App from "../App.es6";
 import {makeDraggable, scrollToStep} from "../steps/HorizontalScroll.es6";
 import QuickDetails from "../details/QuickDetails.es6";
 import * as BuildStepActions from "../actions/BuildStepActions.es6";
@@ -53,15 +54,17 @@ export class BuildDetails extends React.Component {
         }
 
         if (!stepsToDisplay) {
+            const loadingMessage = "row loadingMessage" + App.darkTheme();
             return <div className="twelve columns buildDetails">
-                <div className="row loadingMessage">Loading build details</div>
+                <div className={loadingMessage}>Loading build details</div>
             </div>;
         }
 
         const quickDetails = <QuickDetails buildId={buildId}/>;
 
         /* eslint-disable no-return-assign */
-        return <div className="BuildDetails" id={"draggable" + buildId}>
+        const buildDetails = "BuildDetails" + App.darkTheme();
+        return <div className={buildDetails} id={"draggable" + buildId}>
             {quickDetails}
             <div ref={(detailsDom) => this.detailsDom = detailsDom} className="BuildDetailSteps">
                 {R.map(step => <BuildStep key={step.stepId} step={step} buildId={buildId}/>)(stepsToDisplay)}

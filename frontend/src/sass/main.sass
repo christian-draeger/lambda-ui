@@ -14,9 +14,14 @@ body
 .hidden
   visibility: collapse
 
-.loadingMessage
+.loadingMessage, .loadingMessageDarkTheme
   padding-left: 15px
+
+.loadingMessage
   color: black
+
+.loadingMessageDarkTheme
+  color: $dark-light-grey
 
 %link-shared
   padding: 0 12px
@@ -34,12 +39,12 @@ body
 
 .linkDarkTheme
   @extend %link-shared
-  color: $light-blue
-  border-right-color: lighten($light-blue, 20%)
+  color: $dark-grey
+  border-right-color: darken($dark-grey, 10%)
 
 .linkDarkTheme:hover, .link:active, .link:focus
-  color: lighten($light-blue, 20%)
+  color: $lightGrey
 
-.link:last-child
+.link:last-child, .linkDarkTheme:last-child
   border-right: none
 

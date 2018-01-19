@@ -17,7 +17,7 @@ export const HeaderLinks = (props) => {
     const defaultTarget = R.defaultTo("_blank");
 
     const linkComponent = (link, key) => {
-        return <a className={"link" + (props.darkTheme ? "DarkTheme" : "")} target={defaultTarget(link.target)} key={key} href={link.url}>{link.text}</a>;
+        return <a className={"link" + App.darkTheme()} target={defaultTarget(link.target)} key={key} href={link.url}>{link.text}</a>;
     };
 
     const mapIndexed = R.addIndex(R.map);
@@ -28,35 +28,33 @@ export const HeaderLinks = (props) => {
 };
 
 HeaderLinks.propTypes = {
-    links: PropTypes.array,
-    darkTheme: PropTypes.bool
-};
+    links: PropTypes.array};
 
-const startBuildButton = (showStartBuildButton, triggerNewFn, darkTheme) => {
+const startBuildButton = (showStartBuildButton, triggerNewFn) => {
     if(showStartBuildButton) {
-        return <button className={"runButton" + (darkTheme ? "DarkTheme" : "")} onClick={triggerNewFn}>Start Build</button>;
+        return <button className={"runButton" + App.darkTheme()} onClick={triggerNewFn}>Start Build</button>;
     }
     return null;
 };
 
-export const Header = ({pipelineName, links, showStartBuildButton, darkTheme}) => {
+export const Header = ({pipelineName, links, showStartBuildButton}) => {
     const triggerNewFn = () => App.backend().triggerNewBuild();
 
     let headerLinks;
     if(links) {
-        headerLinks = <HeaderLinks links={links} darkTheme={darkTheme} />;
+        headerLinks = <HeaderLinks links={links} />;
     }
     else {
         headerLinks = "";
     }
 
-    return <div className={"appHeader" + (darkTheme ? "DarkTheme" : "")}>
+    return <div className={"appHeader" + App.darkTheme()}>
         <div className="logo">
                 <img src={logo} className="logoImage" alt="logo"/>
                 <span className="logoText">{pipelineName}</span>
         </div>
         {headerLinks}
-        {startBuildButton(showStartBuildButton, triggerNewFn, darkTheme)}
+        {startBuildButton(showStartBuildButton, triggerNewFn)}
     </div>;
 };
 
@@ -64,7 +62,6 @@ export const Header = ({pipelineName, links, showStartBuildButton, darkTheme}) =
 Header.propTypes = {
     pipelineName: PropTypes.string.isRequired,
     showStartBuildButton: PropTypes.bool.isRequired,
-    darkTheme: PropTypes.bool,
     links: PropTypes.array
 };
 
@@ -73,8 +70,7 @@ export const mapStateToProps = (state) => {
     return {
         pipelineName: state.config.name,
         links: headerLinks,
-        showStartBuildButton: R.pathOr(true, ["config", "showStartBuildButton"])(state),
-        darkTheme: state.config.darkTheme
+        showStartBuildButton: R.pathOr(true, ["config", "showStartBuildButton"])(state)
     };
 };
 

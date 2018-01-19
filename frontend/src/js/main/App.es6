@@ -13,6 +13,7 @@ import Footer from "./Footer.es6";
 
 let backend;
 let appStore;
+let darkTheme;
 
 export class LambdaUI {
 
@@ -24,8 +25,13 @@ export class LambdaUI {
         return backend;
     }
 
+    darkTheme() {
+        return darkTheme;
+    }
+
     startUp(config) {
         appStore = createStore();
+        darkTheme = window.lambdaui.config.darkTheme ? "DarkTheme" : "";
         if (config) {
             appStore.dispatch(addConfiguration(config));
         }
