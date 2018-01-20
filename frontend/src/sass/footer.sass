@@ -1,5 +1,5 @@
 @import 'colors'
-
+@import 'colorsDarkTheme'
 
 .main
   min-height: 100%
@@ -10,15 +10,18 @@
   display: block
   height: 40px
 
-
-.footer
+.footer,
+.footerDarkTheme
   height: 40px
 
   & .version-info
     font-size: 0.8em
 
-.version-info__link
+.footerDarkTheme
+  background-color: $fuckin-dark-grey
 
+.version-info__link,
+.version-info__linkDarkTheme
   & > a
     padding: 0
     color: $dark-light-grey
@@ -26,3 +29,10 @@
 
   & > a:hover, a:active, a:focus
     color: darken($blue, 20%)
+
+.version-info__linkDarkTheme
+  & > a
+    color: $darker-grey
+
+  & > a:hover, a:active, a:focus
+    color: lighten($darker-grey, 20%)
