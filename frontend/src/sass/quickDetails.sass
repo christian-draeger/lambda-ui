@@ -92,9 +92,15 @@
     border: 1px solid $dark-light-grey
 
 .quickStepContainer
+  background-color: transparentize($very-dark-grey, 0.9)
+
+.quickStepContainerDarkTheme
+  background-color: transparentize($dark-light-grey, 0.8)
+
+.quickStepContainer,
+.quickStepContainerDarkTheme
   display: inline-block
   vertical-align: top
-  background-color: transparentize($very-dark-grey, 0.9)
   border-radius: 5px
 
   &:first-of-type

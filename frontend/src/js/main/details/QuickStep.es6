@@ -20,7 +20,7 @@ export class QuickStep extends React.Component {
             return <div title={step.name} className={quickStepClasses} onClick={scrollToStep}></div>;
         }
 
-        return <div className="quickStepContainer">
+        return <div className={"quickStepContainer" + App.darkTheme()}>
             <div title={step.name} className={quickStepClasses} onClick={scrollToStep}></div>
             <div className="quickSubsteps">
                 {R.map(step => <QuickStepRedux maxDepth={maxDepth} curDepth={curDepth + 1} key={step.stepId} buildId={buildId} step={step} />)(step.steps)}</div>
