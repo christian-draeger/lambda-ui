@@ -1,4 +1,5 @@
 @import "colors"
+@import "colorsDarkTheme"
 
 .BuildDetailSteps
 
@@ -74,12 +75,31 @@
       width: 13px
       right: -13px
 
+.BuildDetailsDarkTheme .BuildStep
+  &.LowermostStep
+    background-color: #707070
+    color: $white
+    border: 1px solid #707070
+    margin: 0px 10px
+
+  &.WithSubsteps
+    border-width: 0px 2px
+    border-color: $dark-light-grey
+    border-style: solid
+
+  &:before , &:after
+    background-color: $dark-light-grey
+
 .BuildStepParallel
   background-color: transparentize($very-dark-grey, 0.8)
   margin: 0px 10px
   border: 1px solid $grey
   display: inline-block
   vertical-align: top
+
+.BuildDetailsDarkTheme .BuildStepParallel
+  background-color: transparentize($dark-light-grey, 0.9)
+  border: 1px solid $very-dark-grey
 
 .BuildStepWithSubsteps
   border-radius: 3px
@@ -89,6 +109,10 @@
   display: inline-block
   vertical-align: top
   padding-bottom: 10px
+
+.BuildDetailsDarkTheme .BuildStepWithSubsteps
+  background-color: transparentize($dark-light-grey, 0.9)
+  border-color: $very-dark-grey
 
 .BuildStepInParallel
   display: block
@@ -109,6 +133,11 @@
   // Only for direct child
   >.BuildStep
     width: calc(100% - 20px)
+
+.BuildDetailsDarkTheme .ParallelLine
+  border-color: $dark-light-grey
+  &:last-of-type
+    border-color: transparent
 
 .LowermostStep:first-of-type:before
   left: -11px
@@ -164,3 +193,12 @@
 
 .BuildStep.killed .buildIcon
   background-color: $black
+
+.BuildDetailsDarkTheme .BuildStep.success .buildIcon
+  background-color: $brighter-green
+.BuildDetailsDarkTheme .BuildStep.failure .buildIcon
+  background-color: $brighter-red
+.BuildDetailsDarkTheme .BuildStep.running .buildIcon
+  background-color: $brighter-blue
+.BuildDetailsDarkTheme .BuildStep.waiting .buildIcon
+  background-color: $orange

@@ -46,15 +46,14 @@
 
 .buildSummaryDarkTheme
   @extend %buildSummary-shared
-  border-bottom: 2px solid #606060
+  border-bottom: 1px solid $really-dark-grey
   background-color: #2d2d2d
-  transition: all 3s ease-in-out
   &:nth-child(even)
     background-color: lighten(#2d2d2d, 3%)
   &.success:before
-    background-color: #37BF2D
+    background-color: $brighter-green
   &.failed:before
-    background-color: #d71318
+    background-color: $brighter-red
   &.running:before
     background-color: $brighter-blue
   &.unknown:before
@@ -199,10 +198,7 @@
     & .buildInfo
       border-bottom: 2px solid $lightGrey
 
-.buildSummaryDarkTheme
-  &.open
-    & .buildInfo
-      border-bottom: 2px solid #606060
+
 
 //Build Info
 .buildInfo
